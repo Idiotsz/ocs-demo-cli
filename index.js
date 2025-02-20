@@ -60,6 +60,8 @@ program
 	.command('commit [message]')
 	.option('-m, --message [message]', '提交信息')
 	.option('-a, --add [add]', '是否暂存所有文件')
+	.option('-p, --push [push]', '是否暂存所有文件')
+
 	.action(async function (message, options) {
 		console.log(options)
 		if(!shell.which("git")) {
