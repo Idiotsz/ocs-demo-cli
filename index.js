@@ -58,11 +58,13 @@ program
 // 自动提交
 program
 	.command('commit [message]')
+	.description('自动提交,-m为必传，只是为了生成提交信息，顺便带着提交，否则为什么不自己用工具上传呢！')
 	.option('-m, --message [message]', '提交信息')
 	.option('-a, --add [add]', '是否暂存所有文件')
 	.option('-p, --push [push]', '是否暂存所有文件')
 
 	.action(async function (message, options) {
+		console.log(chalk.greenBright('自动提交添加信息,-m为必传，只是为了生成提交信息，顺便带着提交，否则为什么不自己用工具上传呢！'))
 		console.log(options)
 		if(!shell.which("git")) {
 			shell.echo('Sorry, this script requires git');
