@@ -80,17 +80,21 @@ export const gitHandle = async (name, options) => {
     if(add) {
         shell.exec('git add .', { silent: true });
     }
-    const commitResult = shell.exec(`git commit -m "${fullMessage}"`, { silent: true });
-    if (commitResult.code !== 0) {
-        console.log(chalk.red('提交失败，请检查是否有未暂存的更改。'));
-        return;
+    let gitStatus = getGitStatus();
+    if(gitStatus.hasUnstagedChanges) {
+        // 如果有未暂存的提交，就提交以下
+        const commitResult = shell.exec(`git commit -m "${fullMessage}"`, { silent: true });
+        if (commitResult.code !== 0) {
+            console.log(chalk.red('提交失败，请检查是否有未暂存的更改。'));
+            return;
+        }
     }
 
     if(!push) {
         // 如果不需要提交，直接退出
         return;
     }
-    let gitStatus = getGitStatus();
+
     console.log('Git 工作区状态:', fullMessage);
     console.log(`- 是否干净: ${gitStatus.isClean}`);
     console.log(`- 是否有暂存的更改: ${gitStatus.hasStagedChanges}`);
