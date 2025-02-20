@@ -122,9 +122,10 @@ export const gitHandle = async (name, options) => {
 
     let gitStatus = getGitStatus(); // 获取工作区状态
 
-    if (add && gitStatus.hasUnstagedChanges) {
+    if (add) {
         shell.exec('git add .', { silent: true });
         console.log(chalk.greenBright('暂存成功！'));
+        gitStatus = getGitStatus();
     }else {
         console.log(chalk.greenBright('无需暂存'));
     }
