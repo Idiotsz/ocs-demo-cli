@@ -61,6 +61,13 @@ function getGitStatus() {
             status.isBehind = behind > 0;
         }
     }
+    console.log(`- isClean-是否干净: ${status.isClean}`);
+    console.log(`- hasStagedChanges-是否有暂存的更改: ${status.hasStagedChanges}`);
+    console.log(`- hasUnstagedChanges-是否有未暂存的更改: ${status.hasUnstagedChanges}`);
+    console.log(`- hasUncommittedChanges-是否有未提交的更改: ${status.hasUncommittedChanges}`);
+    console.log(`- isAhead-是否领先于远程: ${status.isAhead}`);
+    console.log(`- isBehind-是否落后于远程: ${status.isBehind}`);
+    console.log(`- hasMergeConflicts-是否有合并冲突: ${status.hasMergeConflicts}`);
 
     return status;
 }
@@ -94,14 +101,7 @@ export const gitHandle = async (name, options) => {
         return;
     }
 
-    console.log('Git 工作区状态:', fullMessage);
-    console.log(`- 是否干净: ${gitStatus.isClean}`);
-    console.log(`- 是否有暂存的更改: ${gitStatus.hasStagedChanges}`);
-    console.log(`- 是否有未暂存的更改: ${gitStatus.hasUnstagedChanges}`);
-    console.log(`- 是否有未提交的更改: ${gitStatus.hasUncommittedChanges}`);
-    console.log(`- 是否领先于远程: ${gitStatus.isAhead}`);
-    console.log(`- 是否落后于远程: ${gitStatus.isBehind}`);
-    console.log(`- 是否有合并冲突: ${gitStatus.hasMergeConflicts}`);
+    
     if(gitStatus.isBehind) {
         // 询问是否要拉取代码
         let answers = await inquirer.prompt([
