@@ -75,13 +75,11 @@ export const gitHandle = async (name, options) => {
     const timestamp = getNowDate();
     const fullMessage = `@${username}@${commitMessage}@${timestamp}`;
 
-    
-
     if(add) {
         shell.exec('git add .', { silent: true });
     }
     let gitStatus = getGitStatus(); // 获取工作区状态
-    
+
     if(gitStatus.hasUnstagedChanges) {
         // 如果有未暂存的提交，就提交以下
         const commitResult = shell.exec(`git commit -m "${fullMessage}"`, { silent: true });
