@@ -144,6 +144,7 @@ export const gitHandle = async (name, options) => {
     const pushResult = shell.exec('git push', { silent: true });
     if (pushResult.code !== 0) {
         console.log(chalk.red('推送至远端失败，请检查网络或权限。或手动提交'));
+        console.log(pushResult, "---")
         return;
     }
 
