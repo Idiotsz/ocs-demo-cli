@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "ocs-demo-cli": "./index.js"
+    "ocs-cli": "./index.js"
   },
   "type": "module",
   "keywords": [],
